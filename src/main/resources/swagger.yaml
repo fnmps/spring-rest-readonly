@@ -1,0 +1,76 @@
+swagger: '2.0'
+info:
+  description: This is a simple API
+  version: 1.0.0
+  title: Simple Inventory API
+  # put the contact info for your development or API team
+  contact:
+    email: you@your-company.com
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+# tags are used for organizing operations
+#tags:
+paths:
+  /test/{testId}:
+    get:
+      operationId: getTest
+      produces:
+      - application/json
+      parameters:
+        - in: path
+          name: testId
+          type: string
+          required: true
+      responses:
+        200:
+          description: output
+          schema:
+            $ref: '#/definitions/Test'
+            
+    put:
+      operationId: updateTest
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+        - in: path
+          name: testId
+          type: string
+          required: true
+        - in: body
+          name: testRequest
+          schema:
+            $ref: '#/definitions/Test'
+      responses:
+        201:
+          description: item created
+            
+  /test:
+    post:
+      operationId: createTest
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: testRequest
+        schema:
+          $ref: '#/definitions/Test'
+      responses:
+        201:
+          description: item created
+definitions:
+  Test:
+    type: object
+    properties:
+      id:
+        type: string
+        readOnly: true
+      someAttribute:
+        type: string
+    
